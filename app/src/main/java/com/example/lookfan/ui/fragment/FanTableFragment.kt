@@ -47,6 +47,7 @@ class FanTableFragment:BaseFragment(), FanTabView {
 
     override fun onError(e: String) {
         Toast.makeText(context,e,Toast.LENGTH_LONG).show()
+
     }
 
     override fun onSuccess(result: JSONObject?) {
