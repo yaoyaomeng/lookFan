@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/fanTab_tab"
+        android:layout_width="match_parent"
+        app:tabSelectedTextColor="@color/colorTitle"
+        app:tabIndicatorHeight="3dp"
+        app:tabIndicatorColor="@color/colorTitle"
+        android:background="@color/colorPrimary"
+        android:layout_height="?attr/actionBarSize"
+        android:elevation="10dp"
+        />
+        <com.example.lookfan.widget.VpSwipeRefreshLayout
+            android:layout_below="@+id/fanTab_tab"
+            android:id="@+id/fan_swipe"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/fanTab_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/fanTab_tab"
+            />
+        </com.example.lookfan.widget.VpSwipeRefreshLayout>
+</RelativeLayout>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="320dp"
+        android:layout_margin="10dp"
+        app:cardElevation="18dp"
+        >
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            >
+            <ImageView
+                android:id="@+id/home_img"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:src="@mipmap/bgtest"
+                android:scaleType="centerCrop"
+                />
+            <TextView
+                android:id="@+id/home_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:layout_margin="10dp"
+                android:textColor="@color/colorTitle"
+                android:text="我是一个标题"
+                android:layout_alignBottom="@+id/home_img"
+                />
+            <TextView
+                android:id="@+id/home_tag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="标签"
+                android:layout_below="@+id/home_img"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                />
+            <TextView
+                android:id="@+id/home_show"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="这是介绍"
+                android:ellipsize="end"
+                android:lines="2"
+                android:layout_below="@+id/home_tag"
+                android:layout_marginLeft="10dp"
+                />
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>
