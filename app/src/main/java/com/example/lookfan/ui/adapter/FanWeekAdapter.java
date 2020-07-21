@@ -20,6 +20,8 @@ import java.util.List;
 public class FanWeekAdapter extends RecyclerView.Adapter<FanWeekAdapter.ViewHolder> {
     private List<FanTabBean> mBeans = new ArrayList<>();
     private Context context;
+    private onMyClick mListener;
+
     public FanWeekAdapter(Context context) {
         this.context = context;
     }
@@ -31,8 +33,17 @@ public class FanWeekAdapter extends RecyclerView.Adapter<FanWeekAdapter.ViewHold
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
+        holder.itemView.setClickable(true);
         holder.setData(position);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mListener != null) {
+                    mListener.onTabClick(mBeans.get(position).getTitle(),mBeans.get(position).getUrl());
+                }
+            }
+        });
     }
 
     @Override
@@ -62,5 +73,13 @@ public class FanWeekAdapter extends RecyclerView.Adapter<FanWeekAdapter.ViewHold
             title.setText(mBeans.get(position).getTitle());
             drama.setText(mBeans.get(position).getDrama());
         }
+    }
+
+    public void setonMyClickListener(onMyClick listener) {
+        this.mListener = listener;
+    }
+
+    public interface onMyClick {
+        void onTabClick(String title,String url);
     }
 }

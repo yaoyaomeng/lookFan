@@ -1,12 +1,15 @@
 package com.example.lookfan.ui.fragment
 
 import android.graphics.Color
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import androidx.viewpager.widget.ViewPager
 import com.example.lookfan.R
 import com.example.lookfan.base.BaseFragment
 import com.example.lookfan.presenter.impl.FabTabPresenter
+import com.example.lookfan.presenter.impl.FanListPresenter
 import com.example.lookfan.ui.adapter.FanFragmentPagerAdapter
 import com.example.lookfan.utils.ThreadUtils
 import com.example.lookfan.utils.Utils
@@ -23,22 +26,21 @@ class FanTableFragment:BaseFragment(), FanTabView {
     }
 
     private val presenter by lazy { FabTabPresenter() }
-
+    private val week by lazy {  Utils.utils.getWeekOfDate(Date())  }
     override fun initView(view: View) {
         presenter.registerCallback(this)
         val tab = view.findViewById<TabLayout>(R.id.fanTab_tab)
         val swipe = view.findViewById<SwipeRefreshLayout>(R.id.fan_swipe)
+        val pager = view.findViewById<ViewPager>(R.id.fanTab_pager)
+        val adapter = FanFragmentPagerAdapter(childFragmentManager,0)
+        pager.adapter = adapter
+        tab.setupWithViewPager(pager)
         swipe.setColorSchemeColors(Color.RED,Color.YELLOW)
+        swipe.isRefreshing = true
         swipe.setOnRefreshListener {
             presenter.loadData()
         }
-
-         val week = Utils.utils.getWeekOfDate(Date())
-         tab.getTabAt(week)?.select()
-
-        //val pager = view.findViewById<ViewPager>(R.id.fanTab_pager)
-        //pager.adapter = FanFragmentPagerAdapter(childFragmentManager,0)
-        //tab.setupWithViewPager(pager)
+        tab.getTabAt(week)?.select()
     }
 
     override fun loadData() {
@@ -47,15 +49,16 @@ class FanTableFragment:BaseFragment(), FanTabView {
 
     override fun onError(e: String) {
         Toast.makeText(context,e,Toast.LENGTH_LONG).show()
-
     }
 
+    private val fanListPresenter = FanListPresenter.fanListPresenter
     override fun onSuccess(result: JSONObject?) {
         if (result != null) {
+            fanListPresenter.setResult(result,week)
             ThreadUtils.onMainThread {
-                fanTab_pager.adapter = FanFragmentPagerAdapter(childFragmentManager,0,result)
-                fanTab_tab.setupWithViewPager(fanTab_pager)
-                fan_swipe.isRefreshing = false
+                if (fan_swipe != null) {
+                    fan_swipe.isRefreshing = false
+                }
             }
         }else {
             Toast.makeText(context,"代码解析失败",Toast.LENGTH_LONG).show()

@@ -40,7 +40,9 @@ class HomePresenter:IHomePresenter, ResponseHandler<List<HomeBean>> {
         NetManager.netManager.sendRequest(HomeRequest(0, Utils.utils.getString(R.string.url)!!,object :
             ResponseHandler<String> {
             override fun onError(e: String) {
-                mCallback!!.onError(e)
+                if (mCallback != null) {
+                    mCallback!!.onError(e)
+                }
             }
 
             override fun onSuccess(type: Int, result: String?) {

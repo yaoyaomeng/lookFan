@@ -1,30 +1,66 @@
 package com.example.lookfan.ui.fragment
 
-import android.util.Log
+import android.content.Intent
 import android.view.View
-import android.widget.TextView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.lookfan.R
 import com.example.lookfan.base.BaseFragment
 import com.example.lookfan.bean.FanTabBean
+import com.example.lookfan.presenter.impl.FanListPresenter
 import com.example.lookfan.ui.adapter.FanWeekAdapter
-import org.w3c.dom.Text
+import com.example.lookfan.utils.ThreadUtils
+import com.example.lookfan.view.FanListView
 
-class FanListFragment(val bean:List<FanTabBean>):BaseFragment() {
+
+
+class FanListFragment:BaseFragment(), FanListView, FanWeekAdapter.onMyClick {
 
     override fun getLayoutRes(): Int {
         return R.layout.fragment_fan
     }
+
     private val adapter:FanWeekAdapter by lazy { FanWeekAdapter(context) }
+    private val presenter = FanListPresenter.fanListPresenter
+    private val week by lazy { arguments?.getString("args") }
+
     override fun initView(view: View) {
         val recyclerView = view.findViewById<RecyclerView>(R.id.rv_list)
         recyclerView.layoutManager = GridLayoutManager(context,2)
         recyclerView.adapter = adapter
+        adapter.setonMyClickListener(this)
+        presenter.registerCallback(this)
     }
 
+
+
     override fun loadData() {
-        adapter.updateData(bean)
+        if (week != null) {
+            presenter.loadData(week!!)
+        }
     }
+
+    override fun onSuccess(result: List<FanTabBean>?) {
+        ThreadUtils.onMainThread {
+            adapter.updateData(result)
+        }
+    }
+
+    override fun onError(e: String) {
+        myToast(e)
+    }
+
+    override fun onDestroy() {
+        presenter.unRegisterCallback(this)
+        super.onDestroy()
+    }
+
+    override fun onTabClick(title: String?, url: String?) {
+        if(title != null && url != null) {
+            //val intent:Intent = Intent(this,)
+            //startActivity()
+        }
+    }
+
 
 }
