@@ -59,6 +59,7 @@ class FanListFragment:BaseFragment(), FanListView, FanWeekAdapter.onMyClick {
         if(title != null && url != null) {
             //val intent:Intent = Intent(this,)
             //startActivity()
+            
         }
     }
 
