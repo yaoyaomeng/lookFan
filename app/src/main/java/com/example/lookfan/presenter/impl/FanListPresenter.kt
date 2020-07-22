@@ -28,8 +28,10 @@ class FanListPresenter private constructor():IFanListPresenter {
         if (result != null) {
             mCallback!!.onSuccess(getList(week))
         }else {
-            this.result = LookFan.homeResult
-            mCallback!!.onSuccess(getList(week))
+            if (LookFan.homeResult != null) {
+                this.result = LookFan.homeResult
+                mCallback!!.onSuccess(getList(week))
+            }
         }
     }
 

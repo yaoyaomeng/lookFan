@@ -48,7 +48,9 @@ class FanTableFragment:BaseFragment(), FanTabView {
     }
 
     override fun onError(e: String) {
-        Toast.makeText(context,e,Toast.LENGTH_LONG).show()
+        ThreadUtils.onMainThread {
+            Toast.makeText(context,e,Toast.LENGTH_LONG).show()
+        }
     }
 
     private val fanListPresenter = FanListPresenter.fanListPresenter

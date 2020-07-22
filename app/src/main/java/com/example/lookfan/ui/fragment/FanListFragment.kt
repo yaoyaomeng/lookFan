@@ -1,6 +1,8 @@
 package com.example.lookfan.ui.fragment
 
 import android.content.Intent
+import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -8,6 +10,7 @@ import com.example.lookfan.R
 import com.example.lookfan.base.BaseFragment
 import com.example.lookfan.bean.FanTabBean
 import com.example.lookfan.presenter.impl.FanListPresenter
+import com.example.lookfan.ui.activity.DescActivity
 import com.example.lookfan.ui.adapter.FanWeekAdapter
 import com.example.lookfan.utils.ThreadUtils
 import com.example.lookfan.view.FanListView
@@ -57,9 +60,11 @@ class FanListFragment:BaseFragment(), FanListView, FanWeekAdapter.onMyClick {
 
     override fun onTabClick(title: String?, url: String?) {
         if(title != null && url != null) {
-            //val intent:Intent = Intent(this,)
-            //startActivity()
-            
+            val bundle = Bundle()
+            bundle.putString("title",title)
+            bundle.putString("url",url)
+            val intent = Intent(context,DescActivity::class.java)
+            startActivity(intent.putExtras(bundle))
         }
     }
 

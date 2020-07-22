@@ -50,7 +50,6 @@ class HomeFragment:BaseFragment(), HomeView {
                                 Toast.makeText(context,"数据已全部加载",Toast.LENGTH_LONG).show()
                             }else {
                                 page++
-                                //Log.d("调试加载", "onScrollStateChanged: $page")
                                 presenter.loadMore(page)
                             }
                         }
@@ -65,7 +64,9 @@ class HomeFragment:BaseFragment(), HomeView {
     }
 
     override fun onError(e: String) {
-        Toast.makeText(context,e,Toast.LENGTH_LONG).show()
+        ThreadUtils.onMainThread {
+            Toast.makeText(context,e,Toast.LENGTH_LONG).show()
+        }
     }
 
     override fun onSuccess(result: List<HomeBean>?) {
@@ -89,7 +90,6 @@ class HomeFragment:BaseFragment(), HomeView {
 
     override fun onDestroy() {
         presenter.unRegisterCallback(this)
-        Log.d("调试生命周期", "onDestroy: ")
         super.onDestroy()
     }
 
