@@ -19,6 +19,7 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
     }
 
     override fun initView() {
+        setSupportActionBar(toolbar)
         initMainToolbar()
         val bottomNavigation = findViewById<BottomNavigationView>(R.id.bottom)
         bottomNavigation.setOnNavigationItemSelectedListener(this)

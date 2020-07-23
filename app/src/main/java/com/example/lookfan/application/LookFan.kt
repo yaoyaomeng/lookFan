@@ -15,7 +15,6 @@ import org.json.JSONObject
 class LookFan:Application() {
 
     companion object {
-        var homeUrl:String? = null
         var homeResult: JSONObject? = null
     }
 

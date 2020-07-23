@@ -1,6 +1,7 @@
 package com.example.lookfan.ui.activity
 
 
+
 import android.util.Log
 import com.example.lookfan.R
 import com.example.lookfan.base.BaseActivity
@@ -20,9 +21,11 @@ class DescActivity : BaseActivity() {
         }
 
         val toolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar_desc)
-        val collapsingToolbarLayout = findViewById<CollapsingToolbarLayout>(R.id.collapsing_toolbar)
         setSupportActionBar(toolbar)
-        this.actionBar?.setDisplayHomeAsUpEnabled(false)
+        val action = supportActionBar!!
+        action.setDisplayHomeAsUpEnabled(true)
+        action.setDisplayShowTitleEnabled(false)
+
     }
 
     override fun loadData() {
