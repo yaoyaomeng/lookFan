@@ -1,24 +1,28 @@
 package com.example.lookfan.ui.activity
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
+
 import android.util.Log
-import android.view.TextureView
-import android.view.View
-import android.widget.TextView
 import com.example.lookfan.R
 import com.example.lookfan.base.BaseActivity
-import com.example.lookfan.base.BaseFragment
-import kotlinx.android.synthetic.main.activity_desc.*
+import com.google.android.material.appbar.CollapsingToolbarLayout
+
 
 class DescActivity : BaseActivity() {
     override fun getLayoutRes(): Int {
         return R.layout.activity_desc
     }
 
+
     override fun initView() {
-        Log.d("desc", "loadData:")
+        val bundle = intent.extras!!
+        if (!bundle.isEmpty) {
+            Log.d("临时参数调试", "initView:" + bundle.getString("url"))
+        }
+
+        val toolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar_desc)
+        val collapsingToolbarLayout = findViewById<CollapsingToolbarLayout>(R.id.collapsing_toolbar)
+        setSupportActionBar(toolbar)
+        this.actionBar?.setDisplayHomeAsUpEnabled(false)
     }
 
     override fun loadData() {

@@ -27,6 +27,7 @@ class FanTableFragment:BaseFragment(), FanTabView {
 
     private val presenter by lazy { FabTabPresenter() }
     private val week by lazy {  Utils.utils.getWeekOfDate(Date())  }
+
     override fun initView(view: View) {
         presenter.registerCallback(this)
         val tab = view.findViewById<TabLayout>(R.id.fanTab_tab)

@@ -1,6 +1,7 @@
 package com.example.lookfan.utils
 
 import android.content.Context
+import com.example.lookfan.R
 import java.util.*
 
 class Utils() {
@@ -32,6 +33,10 @@ class Utils() {
         var w = cal[Calendar.DAY_OF_WEEK] - 1
         if (w < 0) w = 0
         return weekDays[w]
+    }
+
+    fun getVideoUrl(str:String) :String {
+        return context!!.getString(R.string.url) + str
     }
 
 }

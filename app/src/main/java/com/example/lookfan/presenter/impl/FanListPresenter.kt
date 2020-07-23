@@ -25,6 +25,7 @@ class FanListPresenter private constructor():IFanListPresenter {
     }
 
     override fun loadData(week: String) {
+
         if (result != null) {
             mCallback!!.onSuccess(getList(week))
         }else {

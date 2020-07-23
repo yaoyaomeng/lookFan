@@ -15,6 +15,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:targetApi="n">
+        <activity
+            android:name=".ui.activity.ScrollingActivity"
+            android:label="@string/title_activity_scrolling"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".ui.activity.DescActivity" />
         <activity android:name=".ui.activity.MainActivity">
             <intent-filter>
