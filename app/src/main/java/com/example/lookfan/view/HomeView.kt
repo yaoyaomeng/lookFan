@@ -8,4 +8,5 @@ interface HomeView {
     fun onLoadMore(result: List<HomeBean>?)
     fun pageCount(count:Int)
 
+
 }
